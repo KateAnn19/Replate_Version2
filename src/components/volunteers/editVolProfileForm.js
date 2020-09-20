@@ -2,12 +2,16 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
+import { connect } from "react-redux";
 
-const EditProfileForm = ({ setToggle, profile }) => {
+//actions from Redux
+import { getVolProfData} from "../store/actions/index";
+
+const EditProfileForm = ({ setToggle, profile, volProf }) => {
   const [editProfile, setEditedProfile] = useState({
-    name: profile["volunteer-name"],
-    phone: profile["volunteer-phone"],
-    id: profile["volunteer-id"],
+    name: volProf["volunteer-name"],
+    phone: volProf["volunteer-phone"],
+    id: volProf["volunteer-id"],
   });
 
   
@@ -33,7 +37,10 @@ const EditProfileForm = ({ setToggle, profile }) => {
       .put("volunteers", editProfile)
       .then((res) => {
         //add a successfully assigned to profile message
-        push("/volunteer-profile");
+        //push("/volunteer-profile");
+        setTimeout(function () {
+          window.history.go(-1);
+        }, 1000);
       })
       .catch((err) => console.log(err.response));
   };
@@ -64,4 +71,17 @@ const EditProfileForm = ({ setToggle, profile }) => {
   );
 };
 
-export default EditProfileForm;
+
+const mapStateToProps = (state) => {
+  console.log("this is state in edit volunteer profile form", state);
+  return {
+    isFetching: state.isFetching,
+    error: state.error,
+    volProf: state.busProf,
+  };
+};
+
+export default connect(mapStateToProps, { getVolProfData})(
+  EditProfileForm
+);
+

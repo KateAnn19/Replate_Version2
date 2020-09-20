@@ -36,11 +36,10 @@ const BusinessRegistration = () => {
     axios
       .post("https://replater.herokuapp.com/api/auth/register", values)
       .then((res) => {
-        console.log(res);
         setSuccess(!success);
-        setTimeout(function () {
+        setTimeout(function(){
           push("/")
-        }, 2000);
+        }, 2000)
       })
 
       .catch((err) => {

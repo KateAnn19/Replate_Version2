@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./components/styles/App.css";
 //import Login from "./login";
 
-import Login from "./components/copy-login-redux";
+import LoginUser from "./components/copy-login-redux";
 import Logout from "./components/logout";
 import {
   Route,
@@ -39,18 +39,18 @@ function App() {
         <Container>
           <Jumbotron className="jumbotron">
             <ButtonToolbar className="custom-btn-toolbar">
-              <LinkContainer to="/">
+              <Link to="/">
                 <Button>Login</Button>
-              </LinkContainer>
-              <LinkContainer to="/logout">
+              </Link>
+              <Link to="/logout">
                 <Button>Logout</Button>
-              </LinkContainer>
+              </Link>
             </ButtonToolbar>
           </Jumbotron>
         </Container>
 
         
-          <Route exact path="/" component={Login} />
+          <Route exact path="/" component={LoginUser} />
           <Route
             exact path="/volunteer-registration"
             component={VolunteerRegistration}
@@ -59,26 +59,26 @@ function App() {
             exact path="/business-registration"
             component={BusinessRegistration}
           />
-          <Route
+          <ProtectedRoute
             exact path="/business-profile"
             component={BusinessProfile}
           />
-          <Route
+          <ProtectedRoute
             exact path="/edit-business-profile"
             component={EditProfileForm}
           />
-          <Route
+          <ProtectedRoute
             exact path="/edit-volunteer-profile"
             component={EditVolProfileForm}
           />
-          <Route exact path="/add-pickup" component={AddPickup} />
+          <ProtectedRoute exact path="/add-pickup" component={AddPickup} />
           <ProtectedRoute
             path="/volunteer-profile"
             component={VolunteerProfile}
           />
-          <Route path="/pickup-list" component={PickUpList} />
-          <Route path="/logout" component={Logout} />
-          <Route path="/editPickup" component={EditPickup} />
+          <ProtectedRoute path="/pickup-list" component={PickUpList} />
+          <ProtectedRoute path="/logout" component={Logout} />
+          <ProtectedRoute path="/editPickup" component={EditPickup} />
       </div>
    
   );

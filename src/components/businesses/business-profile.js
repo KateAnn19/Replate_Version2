@@ -36,30 +36,6 @@ let fakeProfile = {
   role: "donor",
 };
 
-// ---------------------------------------------------
-// Dummy Data to be ignored
-//----------------------------------------------------
-// let fakePickups = [
-//   {
-//     type: "Bread",
-//     amount: "2 pounds",
-//     pickupTime: "May 3, 2022",
-//   },
-//   {
-//     type: "Fruit",
-//     amount: "6 pounds",
-//     pickupTime: "June 5, 2022",
-//   },
-//   {
-//     type: "Cereal",
-//     amount: "5 pounds",
-//     pickupTime: "June 23, 2022",
-//   },
-// ];
-// ---------------------------------------------------
-// Dummy Data to be ignored
-//----------------------------------------------------
-
 function BusinessProfile({ getBusProfData, busProf, deleteBusProf }) {
   const [profile, setProfile] = useState(fakeProfile);
   const [pickups, setPickups] = useState([]);
@@ -147,27 +123,4 @@ export default connect(mapStateToProps, { getBusProfData, deleteBusProf })(
   BusinessProfile
 );
 
-//------------------------------------------------------
-//this is for testing purposes and can be ignored
-//------------------------------------------------------
 
-// eslint-disable-next-line no-lone-blocks
-{
-  /* <div className="container">
-        {pickups.map((pickup) => (
-          <div className="pickups">
-            <div className="pickups-container">
-              <h2>{pickup.type}</h2>
-              <h2>{pickup.amount}</h2>
-              <h2>{pickup.pickupTime}</h2>
-            </div>
-            <button>Edit</button>
-            <button>Delete</button>
-          </div>
-        ))}
-      </div> */
-}
-
-//------------------------------------------------------
-//this is for testing purposes and can be ignored
-//------------------------------------------------------

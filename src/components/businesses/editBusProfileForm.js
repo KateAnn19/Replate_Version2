@@ -44,7 +44,6 @@ const EditProfileForm = ({ setToggle, togglestate, busProf, profile, getProfileD
     axiosWithAuth()
       .put("donors", editProfile)
       .then((res) => {
-        console.log("Inside editing", res)
         //setToggle(!togglestate);
         //push("/business-profile")
         //getBusProfData();

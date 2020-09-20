@@ -16,7 +16,9 @@ import {
   DELETE_VOLPROFILE_FAILURE,
   POST_LOGIN_CREDENTIALS_START,
   POST_LOGIN_CREDENTIALS_SUCCESS,
-  POST_LOGIN_CREDENTIALS_FAILURE
+  POST_LOGIN_CREDENTIALS_FAILURE,
+  LOG_OUT_USER_START,
+  LOG_OUT_USER_SUCCESS
 } from "../actions";
 
 export const initialState = {
@@ -25,13 +27,15 @@ export const initialState = {
   error: "",
   busProf: {},
   volProf: {},
-  loginInfo: {}
+  loginInfo: {},
+  role: "",
+  success: false
 };
 
 export const replateReducer = (state = initialState, action) => {
-  // console.log("in replate reducer", state);
-  // console.log("in replate reducer action", action);
-  // console.log("in replate reducer action.payload", action.payload);
+  console.log("in replate reducer", state);
+  console.log("in replate reducer action", action);
+  console.log("in replate reducer action.payload", action.payload);
   switch (action.type) {
     case GET_BUSPROFDETAILS_START:
       return {
@@ -125,15 +129,33 @@ export const replateReducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
-        loginInfo: localStorage.setItem("token", action.payload)
-        // loginInfo: action.payload
+        loginInfo: localStorage.setItem("token", action.payload),
+        role: action.role,
+        success: action.success,
+        loggedin: true
       };
     case POST_LOGIN_CREDENTIALS_FAILURE:
       return {
         ...state,
         isFetching: false,
-        error: action.payload,
+        error: action.error,
+        success: action.success,
+        loggedin: false
       };
+    case LOG_OUT_USER_START:
+      return{
+        ...state,
+        isFetching: true
+      }
+    case LOG_OUT_USER_SUCCESS:
+      return{
+        ...state,
+        isFetching: false,
+        loggedout: true,
+        role: "",
+        error: "",
+        success: false
+      }
 
     default:
       return state;

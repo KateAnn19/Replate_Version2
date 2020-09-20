@@ -1,19 +1,30 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useHistory } from 'react-router-dom';
 
 //imports
 //import "./Logout.css";
 
-export default function Logout() {
+import { connect} from "react-redux";
+import { logout } from "./store/actions/index";
+
+function Logout({logout}) {
   const history = useHistory();
 
-  window.localStorage.removeItem('token');
-  window.localStorage.removeItem('loggedInUser');
+  // window.localStorage.removeItem('token');
+  // window.localStorage.removeItem('loggedInUser');
   //setLoggedInUser('');
   //setTimeout, then redirect to login
-  window.setTimeout(() => {
-    history.push('/');
-  }, 2000)
+  useEffect(() => {
+    // make a GET request to fetch the data
+    // pass the token with the request on the Authorization request header
+    logout();
+    
+    setTimeout(() =>{
+      history.push('/');
+    }, 1000)
+    
+  }, []);
+
 
   return (
     <div className="logout">
@@ -21,3 +32,15 @@ export default function Logout() {
     </div>
   )
 }//end logOut
+
+const mapStateToProps = (state) => {
+  return {
+    isFetching: state.isFetching,
+    error: state.error,
+    loginInfo: state.loginInfo,
+    success: state.success,
+    role: state.role,
+  };
+};
+
+export default connect(mapStateToProps, { logout })(Logout);

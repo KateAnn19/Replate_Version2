@@ -51,6 +51,10 @@ const Login = () => {
       .post("auth/login", loginInfo)
       .then((res) => {
         localStorage.setItem("token", res.data.token);
+        console.log(res)
+        console.log(window.DOMError);
+        console.log(window.DOMException);
+        console.log(window.message);
         //if volunteer push to volunteer profile
         //if business push to business profile
         // eslint-disable-next-line no-lone-blocks
@@ -62,7 +66,7 @@ const Login = () => {
             : push("/volunteer-profile");
         } //we will want to push to volunteer page if volunteer and donor page if donor
       })
-      .catch((err) => console.log(loginInfo.error));
+      .catch((err) => console.log("error",loginInfo.error));
   };
 
   return (

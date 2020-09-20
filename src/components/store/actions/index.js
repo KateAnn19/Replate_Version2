@@ -28,6 +28,10 @@ export const POST_LOGIN_CREDENTIALS_START = "POST_LOGIN_CREDENTIALS_START";
 export const POST_LOGIN_CREDENTIALS_SUCCESS = "POST_LOGIN_CREDENTIALS_SUCCESS";
 export const POST_LOGIN_CREDENTIALS_FAILURE = "POST_LOGIN_CREDENTIALS_FAILURE";
 
+export const LOG_OUT_USER_START = "LOG_OUT_USER_START";
+export const LOG_OUT_USER_SUCCESS = "LOG_OUT_USER_SUCCESS";
+
+
 export const deletePickup = (id) => {
   // make an async request
   // redux-thunk allows us to return functions instead of objects
@@ -118,13 +122,31 @@ export const login = (loginInfo) => {
     axiosWithAuth()
     .post("auth/login", loginInfo)
     .then((res) => {
-      
-      dispatch({ type: POST_LOGIN_CREDENTIALS_SUCCESS, payload: res.data.token});
+      dispatch({ type: POST_LOGIN_CREDENTIALS_SUCCESS, payload: res.data.token, role: loginInfo.role, success: true});
     })
     .catch(err => {
+      //let name = new DOMException();
+      // console.log(name.name);
+      // console.log(name.NETWORK_ERR);
+      // console.log(err);
+      // debugger
+      // let parser = new DOMParser()
+      // let doc = parser.parseFromString(err, "text/html");
+      // let string = doc.getElementsByTagName("body")[0].innerText;
+      // let matches = string.match(/(\d+)/); 
       dispatch({type: POST_LOGIN_CREDENTIALS_FAILURE, payload: err});
   })
   }
 };
+
+
+export const logout = () => {
+  return dispatch => {
+    dispatch({type: LOG_OUT_USER_START});
+    window.localStorage.removeItem('token');
+    window.localStorage.removeItem('loggedInUser');
+    dispatch({type: LOG_OUT_USER_SUCCESS});
+  }
+}
 
 
