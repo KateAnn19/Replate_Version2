@@ -35,7 +35,6 @@ import { LinkContainer } from "react-router-bootstrap";
 
 function App() {
   return (
-    // <MemoryRouter>
       <div className="App">
         <Container>
           <Jumbotron className="jumbotron">
