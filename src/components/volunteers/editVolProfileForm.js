@@ -9,9 +9,9 @@ import { getVolProfData} from "../store/actions/index";
 
 const EditProfileForm = ({ setToggle, profile, volProf }) => {
   const [editProfile, setEditedProfile] = useState({
-    name: volProf["volunteer-name"],
-    phone: volProf["volunteer-phone"],
-    id: volProf["volunteer-id"],
+    "name": volProf["volunteer-name"],
+    "phone": volProf["volunteer-phone"],
+    "id": volProf["volunteer-id"],
   });
 
   
@@ -45,6 +45,8 @@ const EditProfileForm = ({ setToggle, profile, volProf }) => {
       .catch((err) => console.log(err.response));
   };
 
+
+
   return (
     <div className="">
       <form onSubmit={editVolProfile}>
@@ -77,7 +79,7 @@ const mapStateToProps = (state) => {
   return {
     isFetching: state.isFetching,
     error: state.error,
-    volProf: state.busProf,
+    volProf: state.volProf,
   };
 };
 

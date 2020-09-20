@@ -35,19 +35,15 @@ import { LinkContainer } from "react-router-bootstrap";
 
 function App() {
   return (
-      <div className="App">
+    <>
         <Container>
           <Jumbotron className="jumbotron">
             <ButtonToolbar className="custom-btn-toolbar">
-              <Link to="/">
-                <Button>Login</Button>
-              </Link>
-              <Link to="/logout">
-                <Button>Logout</Button>
-              </Link>
+                <a href="https://ui-replatemarketing.vercel.app/">Contact Us</a>
             </ButtonToolbar>
           </Jumbotron>
         </Container>
+       
 
         
           <Route exact path="/" component={LoginUser} />
@@ -79,9 +75,24 @@ function App() {
           <ProtectedRoute path="/pickup-list" component={PickUpList} />
           <ProtectedRoute path="/logout" component={Logout} />
           <ProtectedRoute path="/editPickup" component={EditPickup} />
-      </div>
-   
+   </>
   );
 }
 
 export default App;
+
+
+
+ // eslint-disable-next-line no-lone-blocks
+ {/* <Container>
+          <Jumbotron className="jumbotron">
+            <ButtonToolbar className="custom-btn-toolbar">
+              <Link to="/">
+                <Button>Login</Button>
+              </Link>
+              <Link to="/logout">
+                <Button>Logout</Button>
+              </Link>
+            </ButtonToolbar>
+          </Jumbotron>
+        </Container> */}
