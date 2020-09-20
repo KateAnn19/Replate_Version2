@@ -1,0 +1,15 @@
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 20%;
+}
+
+
+
+.List{
+    /* display: flex; */
+    border: 1px solid purple;
+    /* width: 20%; */
+    /* flex-wrap: wrap; */
+}
+

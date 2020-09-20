@@ -1,0 +1,74 @@
+.App{
+    text-align: center;
+    background-color: honeydew;
+    height: 100vh;
+}
+
+.custom-btn-toolbar {
+    /* display: inline !important; */
+  }
+  
+  .custom-btn-toolbar > .btn {
+    margin-left: 5rem;
+    margin-right: 5rem;
+    
+  }
+
+  .jumbotron{
+      width: 100%;
+  }
+
+.pickup-list-card {
+    width: 350px;
+    /* border: 1px solid gray; */
+    border-radius: 10px;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    box-shadow: 1px 1px 18px 1px lightgray;
+}
+
+.pickup-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    /* width: 95%; */
+    margin: 5vh auto;
+}
+
+.pickup-list-heading {
+    margin: 0;
+    background-color: lightgray;
+    padding: 12px;
+    font-size: x-large;
+}
+
+.pickup-list-details {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 80%;
+    margin: 0 auto;
+    padding: 15px 0;
+}
+
+/* .pickup-list-buttons {
+
+} */
+
+#amount {
+    font-weight: bolder;
+    font-size: large;
+    border-bottom: 1px solid gray;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+#date {
+    margin-bottom: 10px;
+}
+
+/* 
+#address{}
+#name{}, 
+#phone{} 
+*/
