@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "./styles/App.css";
+import "./components/styles/App.css";
 //import Login from "./login";
 
-import Login from "./copy-login-redux";
-import Logout from "./logout";
+import Login from "./components/copy-login-redux";
+import Logout from "./components/logout";
 import {
   Route,
   Link,
@@ -11,19 +11,19 @@ import {
   useHistory,
   MemoryRouter,
 } from "react-router-dom";
-import ProtectedRoute from "./PrivateRoute";
+import ProtectedRoute from "./components/PrivateRoute";
 
-import VolunteerRegistration from "./volunteers/volunteer-registration";
-import BusinessRegistration from "./businesses/business-registration";
+import VolunteerRegistration from "./components/volunteers/volunteer-registration";
+import BusinessRegistration from "./components/businesses/business-registration";
 
-import BusinessProfile from "./businesses/business-profile";
-import AddPickup from "./businesses/addPickup";
-import EditProfileForm from "./businesses/editBusProfileForm";
-import EditVolProfileForm from "./volunteers/editVolProfileForm";
+import BusinessProfile from "./components/businesses/business-profile";
+import AddPickup from "./components/businesses/addPickup";
+import EditProfileForm from "./components/businesses/editBusProfileForm";
+import EditVolProfileForm from "./components/volunteers/editVolProfileForm";
 
-import VolunteerProfile from "./volunteers/volunteer-profile";
-import PickUpList from "./volunteers/pickup-list";
-import EditPickup from "./businesses/editPickup";
+import VolunteerProfile from "./components/volunteers/volunteer-profile";
+import PickUpList from "./components/volunteers/pickup-list";
+import EditPickup from "./components/businesses/editPickup";
 
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Container from "react-bootstrap/Container";
