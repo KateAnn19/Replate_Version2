@@ -1,6 +1,6 @@
 {
   "name": "replatev2",
-  "homepage": "https://replate-version2.vercel.app/"
+  "homepage": "https://replate-version2.vercel.app/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
