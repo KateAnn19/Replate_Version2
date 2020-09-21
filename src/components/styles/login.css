@@ -1,8 +1,86 @@
-.Login-Form{
-    border: 2px solid ghostwhite;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+
+/* login heading */
+.login_header_container {
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  justify-content: center;
 }
 
-.replate-header{
-    color: green;
-    font-size: 5rem;
+.replate-header {
+  align-self: center;
 }
+
+.replate-title{
+  font-size: 5rem;
+  font-weight: 500;
+  color: mediumseagreen;
+}
+
+.login_image{
+    width: 25%;
+    border-radius: 2%;
+    margin-top: 2%;
+    margin-left: 2%;
+}
+/* login heading*/
+
+/* login form */
+.form_container{
+    margin: 5% 40%;
+   
+}
+
+.login_heading{
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    margin-bottom: 10%;
+}
+
+#login_form{
+    border-radius: 1%;
+    margin-top: 2%;
+    background-color: azure;
+}
+
+#login_submit{
+    background: mediumseagreen;
+    border: none;
+    margin-left: 40%;
+}
+
+/* login form end */
+
+/* registration container */
+
+#register_container{
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    margin-top: 10%;
+}
+
+
+#register_button_container{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5%;
+}
+
+#business_regis_button{
+    background-color: aquamarine;
+    border: none;
+    font-size: 90%;
+    color: black;
+}
+
+#volunteer_regis_button{
+    background-color: aquamarine;
+    border: none;
+    font-size: 90%;
+    color: black;
+}
+
+
+/* registration container end*/

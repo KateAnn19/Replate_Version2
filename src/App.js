@@ -27,13 +27,9 @@ import VolunteerProfile from "./components/volunteers/volunteer-profile";
 import PickUpList from "./components/volunteers/pickup-list";
 import EditPickup from "./components/businesses/editPickup";
 
-import Jumbotron from "react-bootstrap/Jumbotron";
-import Container from "react-bootstrap/Container";
+
 import Navbar from "react-bootstrap/Navbar";
-import Button from "react-bootstrap/Button";
-import ButtonToolbar from "react-bootstrap/ButtonToolbar";
-import { LinkContainer } from "react-router-bootstrap";
-import { Nav } from "react-bootstrap";
+import Nav from "react-bootstrap/Nav";
 
 function App() {
   return (
@@ -48,7 +44,7 @@ function App() {
             />
           <Nav id="nav_container">
           <Nav.Link id="nav_link" href="https://ui-replatemarketing.vercel.app/">
-            Home
+            Contact Us
           </Nav.Link>
           </Nav>
         </Navbar>

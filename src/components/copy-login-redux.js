@@ -11,6 +11,7 @@ import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 
 import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 import { connect, useDispatch } from "react-redux";
 import { login, logout } from "./store/actions/index";
@@ -32,17 +33,16 @@ const useStyles = makeStyles((theme) => ({
 const LoginUser = ({ login, logout, loginInfo, role, success, error }) => {
   const { push } = useHistory();
   const [loginInform, setLoginInfo] = useState(initialState);
-  console.log(success);
-  console.log(loginInform);
-  console.log("role", role);
- 
+
+  console.log(loginInform.username);
+  console.log(loginInform.password);
+  console.log(loginInform.role);
 
   useEffect(() => {
     // make a GET request to fetch the data
     // pass the token with the request on the Authorization request header
-  
-    pushToProfile();  
-    
+
+    pushToProfile();
   }, [role]);
 
   //401, 400, ""
@@ -59,7 +59,6 @@ const LoginUser = ({ login, logout, loginInfo, role, success, error }) => {
     login(loginInform);
   };
 
-
   function pushToProfile() {
     if (role === "business") {
       console.log("inside set timeout");
@@ -71,51 +70,85 @@ const LoginUser = ({ login, logout, loginInfo, role, success, error }) => {
     }
   }
 
-  
-
   return (
     <div>
-      <h1 className="replate-header">Replate</h1>
-      <form
-        className="login"
-        onSubmit={handleSubmit}
-        //we will want to push to volunteer page if volunteer and donor page if donor
-      >
-        <TextField
-          type="text"
-          name="username"
-          value={loginInform.username}
-          onChange={handleChange}
-          placeholder="username"
-        />
-        <TextField
-          type="password"
-          name="password"
-          value={loginInform.password}
-          onChange={handleChange}
-          placeholder="password"
-        />
-        <label htmlFor="role">
-          Please Select
-          <select id="role" name="role" onChange={handleChange}>
-            <option value=""></option>
-            <option value="volunteer">Volunteer</option>
-            <option value="business"> Business</option>
-          </select>
-        </label>
-        <button type="submit">Submit Form</button>
-      </form>
-      <h2>Login</h2>
-      <h2>New to Replate?</h2>
-      <h2>Register Below</h2>
-      <Button variant="light" onClick={() => push("/business-registration")}>
-        {``}
-        Register as a Business
-      </Button>
-      <Button variant="light" onClick={() => push("/volunteer-registration")}>
-        Sign Up as a Volunteer
-      </Button>
-      {error !== "" ? <h1>Try Logging In Again</h1> : null}
+      <div className="login_header_container">
+        <div className="replate-header">
+          <h1 className="replate-title">Replate</h1>
+          <h2 className="replate-subheader">
+            <em>Food Waste Prevention and Improving Lives</em>
+          </h2>
+        </div>
+        <img
+          className="login_image"
+          alt="persons fist bumping"
+          src="https://images.unsplash.com/photo-1584466990376-09422a2b033a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+        ></img>
+      </div>
+      <div className="form_container">
+        <h3 className="login_heading">Login</h3>
+        <Form id="login_form" onSubmit={handleSubmit}>
+          <Form.Group controlId="formBasicUsername">
+            <Form.Label>Username</Form.Label>
+            <Form.Control
+              type="username"
+              value={loginInform.username}
+              onChange={handleChange}
+              name="username"
+              placeholder="Enter Username"
+            />
+          </Form.Group>
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              value={loginInform.password}
+              onChange={handleChange}
+              name="password"
+              placeholder="Password"
+            />
+          </Form.Group>
+          <Form.Group controlId="exampleForm.ControlSelect1">
+            <Form.Label>Please Select One</Form.Label>
+            <Form.Control as="select" name="role" onChange={handleChange}>
+              <option value="">Please Select</option>
+              <option value="volunteer">Volunteer</option>
+              <option value="business">Business</option>
+            </Form.Control>
+          </Form.Group>
+          <Button id="login_submit" type="submit">
+            Submit
+          </Button>
+        </Form>
+        <div id="register_container">
+          <h3>New to Replate?</h3>
+          <h5>
+            <em>Sign Up!</em>
+          </h5>
+          <div id="register_button_container">
+            <Button
+              id="business_regis_button"
+              onClick={() => push("/business-registration")}
+            >
+              {``}
+              Sign Up as a Business
+            </Button>
+            <Button
+              id="volunteer_regis_button"
+              onClick={() => push("/volunteer-registration")}
+            >
+              Sign Up as a Volunteer
+            </Button>
+            
+          </div>
+          <Form.Text className="text-muted">
+              We won't spam your inbox.
+            </Form.Text>
+          {error !== "" ? (
+            <h1 className="login_error">Try Logging In Again</h1>
+          ) : null}
+        </div>
+      </div>
     </div>
   );
 };
