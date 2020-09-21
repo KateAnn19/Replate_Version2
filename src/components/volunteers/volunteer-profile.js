@@ -12,6 +12,10 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 //styles
 import "../styles/pickups.css";
+import "../styles/volunteerprofile.css";
+
+//bootstrap
+import Button from "react-bootstrap/Button";
 
 import EditProfileForm from "./editVolProfileForm";
 
@@ -67,38 +71,41 @@ function VolunteerProfile({getVolProfData, volProf, deleteVolProf}) {
       {isLoaded === false ? (
         "loading"
       ) : (
-        <>
-          <h3>{volProf["volunteer-name"]}</h3>
-          <h3>{volProf["volunteer-phone"]}</h3>
-          <h3>{volProf["username"]}</h3>
-        </>
+        <div className="volunteer_info_container">
+          <h3>Hello, {volProf["volunteer-name"]}</h3>
+          <h3>Phone: {volProf["volunteer-phone"]}</h3>
+          <h3>Username: {volProf["username"]}</h3>
+        </div>
       )}
       {toggle ? <EditProfileForm profile={volProf} setToggle={setToggle} /> : null}
-      <h2>Current Pickups</h2>
-      <div className="Vols-Picks">
+      <h2 className="pickups_heading">Current Pickups</h2>
+      <div className="pickups_lg_container">
         {pickups.map((pickup) => (
           <div key={pickup["pickup-id"]} className="pickups">
             <div className="pickups-container">
-              <h2>{pickup.type}</h2>
-              <h2>{pickup["business-phone"]}</h2>
-              <h2>{pickup["business-name"]}</h2>
-              <h2>{pickup["business-address"]}</h2>
-              <h2>{pickup["amount"]}</h2>
-              <h2>{date(pickup["pickup-date"]).format("ll")}</h2>
-            </div>
-            <button onClick={() => removePickup(pickup["pickup-id"])}>
+              <h3>{pickup.type}</h3>
+              <h3>{pickup["business-phone"]}</h3>
+              <h3>{pickup["business-name"]}</h3>
+              <h3>{pickup["business-address"]}</h3>
+              <h3>{pickup["amount"]}</h3>
+              <h3>{date(pickup["pickup-date"]).format("ll")}</h3>
+              <Button id="delete" onClick={() => removePickup(pickup["pickup-id"])}>
               Delete
-            </button>
+            </Button>
+            <Button id="edit">Edit</Button>
+            </div>
           </div>
         ))}
       </div>
-      <button onClick={() => push("/pickup-list")}>Add Pickup</button>
-      <button onClick={() => setToggle(!toggle)}>Edit Profile</button>
-      <button onClick={() => 
+      <div id="profile_button_group">
+      <Button id="add" onClick={() => push("/pickup-list")}>Add Pickup</Button>
+      <Button id="edit" onClick={() => setToggle(!toggle)}>Edit Profile</Button>
+      <Button id="delete" onClick={() => 
         {
         deleteVolProf()
         push("/logout")
-        }}>Delete Profile</button>
+        }}>Delete Profile</Button>
+      </div>
     </div>
   );
 } //end volunteerProfile

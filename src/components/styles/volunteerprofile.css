@@ -1,0 +1,58 @@
+.volunteer_info_container{
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+}
+
+.pickups_heading{
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    margin-top: 5%;
+}
+
+#profile_button_group{
+    text-align: center;
+    padding: 3%;
+}
+
+/* edit profile form */
+.form_container{
+    margin: 5% 40%;
+   
+}
+
+.login_heading{
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    margin-bottom: 10%;
+}
+
+#login_form{
+    border-radius: 1%;
+    margin-top: 2%;
+    background-color: azure;
+}
+
+#login_submit{
+    background: mediumseagreen;
+    border: none;
+    margin-left: 40%;
+}
+/* edit profile form end */
+
+#add{
+    background: rgb(131, 233, 131);
+    border: none;
+    margin-right: 2%;
+}
+
+#delete{
+    background: red;
+    border: none;
+    margin-right: 2%;
+}
+
+#edit{
+    background: rgb(131, 233, 131);
+    border: none;
+    margin-right: 2%;
+}

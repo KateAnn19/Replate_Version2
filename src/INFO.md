@@ -133,3 +133,26 @@ useEffect(() => {
           </button>
         </form>
 #register form end
+
+
+#edit vol profile form 
+ <form onSubmit={editVolProfile}>
+        <label htmlFor="type">Name</label>
+        <input
+          id="name"
+          type="text"
+          name="name"
+          value={editProfile.name}
+          onChange={handleChange}
+        />
+        <label htmlFor="phone">Phone</label>
+        <input
+          id="phone"
+          type="text"
+          onChange={handleChange}
+          name="phone"
+          value={editProfile.phone}
+        />
+        <button type="submit">Add Updated Profile Information</button>
+      </form>
+      <button onClick={exit}>X</button> 

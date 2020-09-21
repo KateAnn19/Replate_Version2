@@ -9,7 +9,7 @@ import { Button } from '@material-ui/core'; // Material UI styled button
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
 import PickupCard from '../volunteers/PickupCard'
-import "../styles/pickup-list.css";
+import "../styles/pickups.css";
 
 const date = require('moment');  //this is to format the date so it shows up more nicely. I can show you how it works if you are
 //having trouble with it. If you look at Gordon's back-end repo docs in our Replate project he gives an example of exactly how to set this up which is how I have it here. You'll just need to wrap the date response you get back from your get request with this variable. It's a little tricky so don't worry if you have trouble. We'll go through it. 

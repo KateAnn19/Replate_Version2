@@ -6,10 +6,29 @@
 
 
 
-.List{
-    /* display: flex; */
-    border: 1px solid purple;
-    /* width: 20%; */
-    /* flex-wrap: wrap; */
+.pickups_lg_container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
+.pickup-container{
+    margin: 1% 1%;
+    
+}
+
+.pickups{
+    border: 2px solid antiquewhite;
+    border-radius: 2%;
+    width: 20%;
+    margin: 2% 2%;
+    background-color: antiquewhite;
+    color: black;
+    font-weight: 800;
+    
+}
+
+.pickups-container{
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+}
