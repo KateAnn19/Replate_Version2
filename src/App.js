@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./components/styles/App.css";
 //import Login from "./login";
+import logo from "./images/replateIcon.PNG";
+
 
 import LoginUser from "./components/copy-login-redux";
 import Logout from "./components/logout";
@@ -27,64 +29,73 @@ import EditPickup from "./components/businesses/editPickup";
 
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Container from "react-bootstrap/Container";
+import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import { LinkContainer } from "react-router-bootstrap";
-
-
+import { Nav } from "react-bootstrap";
 
 function App() {
   return (
     <>
-        <Container>
-          <Jumbotron className="jumbotron">
-            <ButtonToolbar className="custom-btn-toolbar">
-                <a href="https://ui-replatemarketing.vercel.app/">Contact Us</a>
-            </ButtonToolbar>
-          </Jumbotron>
-        </Container>
-       
+      <>
+        <Navbar variant="dark" id="nav_bar">
+        <img  alt=""
+              src={logo}
+              width="160"
+              height="130"
+              className="d-inline-block align-top logo"
+            />
+          <Nav id="nav_container">
+          <Nav.Link id="nav_link" href="https://ui-replatemarketing.vercel.app/">
+            Home
+          </Nav.Link>
+          </Nav>
+        </Navbar>
 
-        
-          <Route exact path="/" component={LoginUser} />
-          <Route
-            exact path="/volunteer-registration"
-            component={VolunteerRegistration}
-          />
-          <Route
-            exact path="/business-registration"
-            component={BusinessRegistration}
-          />
-          <ProtectedRoute
-            exact path="/business-profile"
-            component={BusinessProfile}
-          />
-          <ProtectedRoute
-            exact path="/edit-business-profile"
-            component={EditProfileForm}
-          />
-          <ProtectedRoute
-            exact path="/edit-volunteer-profile"
-            component={EditVolProfileForm}
-          />
-          <ProtectedRoute exact path="/add-pickup" component={AddPickup} />
-          <ProtectedRoute
-            path="/volunteer-profile"
-            component={VolunteerProfile}
-          />
-          <ProtectedRoute path="/pickup-list" component={PickUpList} />
-          <ProtectedRoute path="/logout" component={Logout} />
-          <ProtectedRoute path="/editPickup" component={EditPickup} />
-   </>
+      </>
+      
+
+      <Route exact path="/" component={LoginUser} />
+      <Route
+        exact
+        path="/volunteer-registration"
+        component={VolunteerRegistration}
+      />
+      <Route
+        exact
+        path="/business-registration"
+        component={BusinessRegistration}
+      />
+      <ProtectedRoute
+        exact
+        path="/business-profile"
+        component={BusinessProfile}
+      />
+      <ProtectedRoute
+        exact
+        path="/edit-business-profile"
+        component={EditProfileForm}
+      />
+      <ProtectedRoute
+        exact
+        path="/edit-volunteer-profile"
+        component={EditVolProfileForm}
+      />
+      <ProtectedRoute exact path="/add-pickup" component={AddPickup} />
+      <ProtectedRoute path="/volunteer-profile" component={VolunteerProfile} />
+      <ProtectedRoute path="/pickup-list" component={PickUpList} />
+      <ProtectedRoute path="/logout" component={Logout} />
+      <ProtectedRoute path="/editPickup" component={EditPickup} />
+    </>
   );
 }
 
 export default App;
 
-
-
- // eslint-disable-next-line no-lone-blocks
- {/* <Container>
+// eslint-disable-next-line no-lone-blocks
+{
+  /* <Container>
           <Jumbotron className="jumbotron">
             <ButtonToolbar className="custom-btn-toolbar">
               <Link to="/">
@@ -95,4 +106,5 @@ export default App;
               </Link>
             </ButtonToolbar>
           </Jumbotron>
-        </Container> */}
+        </Container> */
+}
