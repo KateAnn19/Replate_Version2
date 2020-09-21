@@ -3,6 +3,9 @@ import axios from "axios";
 
 import { Link, useHistory } from "react-router-dom";
 
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+
 let initialState = {
   username: "",
   password: "",
@@ -12,9 +15,8 @@ let initialState = {
   phone: "",
 };
 
-
-let successfulregister = "Thank you! That was a sucess! You'll be re-directed to login page. Please login with username and password."
-
+let successfulregister =
+  "Thank you! That was a sucess! You'll be re-directed to login page. Please login with username and password.";
 
 const BusinessRegistration = () => {
   const [values, setValues] = useState(initialState);
@@ -31,15 +33,15 @@ const BusinessRegistration = () => {
     });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     axios
       .post("https://replater.herokuapp.com/api/auth/register", values)
       .then((res) => {
         setSuccess(!success);
-        setTimeout(function(){
-          push("/")
-        }, 2000)
+        setTimeout(function () {
+          push("/");
+        }, 2000);
       })
 
       .catch((err) => {
@@ -47,65 +49,62 @@ const BusinessRegistration = () => {
       });
   };
 
-  return (
-    success ? (<div><h1>{message}</h1> </div>):
-    <div className="user-form">
-      <form>
-        <label htmlFor="username">
-          Business Name
-          <input
-            id="name"
+  return success ? (
+    <div>
+      <h3 className="regis_success_message">{message}</h3>{" "}
+    </div>
+  ) : (
+    <div className="form_container">
+      <Form id="login_form" onSubmit={handleSubmit}>
+        <Form.Group controlId="formBasicName">
+          <Form.Label>Business Name</Form.Label>
+          <Form.Control
+            type="name"
             onChange={changeHandler}
-            type="text"
             name="name"
-            placeholder="name"
+            placeholder="Enter Business Name"
           />
-        </label>
-        <label htmlFor="username">
-          User Name
-          <input
-            id="username"
+        </Form.Group>
+        <Form.Group controlId="formBasicUsername">
+          <Form.Label>Username</Form.Label>
+          <Form.Control
+            type="username"
             onChange={changeHandler}
-            type="text"
             name="username"
-            placeholder="username"
+            placeholder="Enter Username"
           />
-        </label>
-        <label htmlFor="password">
-          Password
-          <input
-            id="password"
-            onChange={changeHandler}
+        </Form.Group>
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
             type="password"
-            name="password"
-            placeholder="password"
-          />
-        </label>
-        <label htmlFor="phone">
-          Phone
-          <input
-            id="phone"
             onChange={changeHandler}
-            type="text"
+            name="password"
+            placeholder="Password"
+          />
+        </Form.Group>
+        <Form.Group controlId="formBasicPhonenumber">
+          <Form.Label>Phone Number</Form.Label>
+          <Form.Control
+            type="phone"
+            onChange={changeHandler}
             name="phone"
             placeholder="Phone Number"
           />
-        </label>
-        <label htmlFor="address">
-          Address
-          <input
-            id="address"
+        </Form.Group>
+        <Form.Group controlId="formBasicAddress">
+          <Form.Label>Address</Form.Label>
+          <Form.Control
+            type="address"
             onChange={changeHandler}
-            type="text"
             name="address"
             placeholder="address"
           />
-        </label>
-
-        <button onClick={handleSubmit} type="submit">
-          Register
-        </button>
-      </form>
+        </Form.Group>
+        <Button id="login_submit" type="submit">
+          Submit
+        </Button>
+      </Form>
       <p>
         Already have an account? <Link to="/">Log in</Link>
       </p>

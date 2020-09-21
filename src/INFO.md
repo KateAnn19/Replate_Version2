@@ -71,3 +71,65 @@ useEffect(() => {
         <button type="submit">Submit Form</button>
       </form> 
 # form for login 
+
+
+
+#register form 
+ <div className="user-form">
+        <form>
+          <label htmlFor="username">
+            Business Name
+            <input
+              id="name"
+              onChange={changeHandler}
+              type="text"
+              name="name"
+              placeholder="name"
+            />
+          </label>
+          <label htmlFor="username">
+            User Name
+            <input
+              id="username"
+              onChange={changeHandler}
+              type="text"
+              name="username"
+              placeholder="username"
+            />
+          </label>
+          <label htmlFor="password">
+            Password
+            <input
+              id="password"
+              onChange={changeHandler}
+              type="password"
+              name="password"
+              placeholder="password"
+            />
+          </label>
+          <label htmlFor="phone">
+            Phone
+            <input
+              id="phone"
+              onChange={changeHandler}
+              type="text"
+              name="phone"
+              placeholder="Phone Number"
+            />
+          </label>
+          <label htmlFor="address">
+            Address
+            <input
+              id="address"
+              onChange={changeHandler}
+              type="text"
+              name="address"
+              placeholder="address"
+            />
+          </label>
+
+          <button onClick={handleSubmit} type="submit">
+            Register
+          </button>
+        </form>
+#register form end

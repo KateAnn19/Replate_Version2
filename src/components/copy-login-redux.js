@@ -6,9 +6,7 @@ import { useHistory, useParams } from "react-router-dom";
 import "./styles/login.css";
 
 import { makeStyles } from "@material-ui/core/styles";
-//import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Paper from "@material-ui/core/Paper";
+
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -145,7 +143,7 @@ const LoginUser = ({ login, logout, loginInfo, role, success, error }) => {
               We won't spam your inbox.
             </Form.Text>
           {error !== "" ? (
-            <h1 className="login_error">Try Logging In Again</h1>
+            <h3 className="login_error">Try Logging In Again</h3>
           ) : null}
         </div>
       </div>
