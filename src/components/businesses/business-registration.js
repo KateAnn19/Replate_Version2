@@ -55,6 +55,7 @@ const BusinessRegistration = () => {
     </div>
   ) : (
     <div className="form_container">
+      <h3 className="bus_regis_header"><em>Business Registration</em></h3>
       <Form id="login_form" onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicName">
           <Form.Label>Business Name</Form.Label>

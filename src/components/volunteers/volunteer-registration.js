@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import axios from "axios";
 
 import { Link, useHistory } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 let initialState = {
   username: "",
@@ -45,72 +47,105 @@ const VolunteerRegistration = () => {
         } //end if
       });
   };
-  useEffect(() => {
-    // if (typeof status === "object" && status !== undefined) {
-    //   status &&
-    //     values.setCreateUser({
-    //       ...values.createUser,
-    //       ...status,
-    //     });
-    //   setIsError(false);
-    //   setMessage("Successful Registration");
-    // } else if (status === "duplicate") {
-    //   setIsError(true);
-    //   setMessage("That user already exists");
-    // }
-  }, []);
   return (
-    success ? <div><h2>{message}</h2></div>:
-    <div className="user-form">
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">
-          Name
-          <input
-            id="name"
+    success ? <div><h3>{message}</h3></div>:
+    <div className="form_container">
+      <h3 className="bus_regis_header"><em>Volunteer Registration</em></h3>
+      <Form id="login_form" onSubmit={handleSubmit}>
+        <Form.Group controlId="formBasicName">
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            type="name"
             onChange={changeHandler}
-            type="text"
             name="name"
-            placeholder="name"
+            placeholder="Enter Name"
           />
-        </label>
-        <label htmlFor="username">
-          User Name
-          <input
-            id="username"
+        </Form.Group>
+        <Form.Group controlId="formBasicUsername">
+          <Form.Label>Username</Form.Label>
+          <Form.Control
+            type="username"
             onChange={changeHandler}
-            type="text"
             name="username"
-            placeholder="username"
+            placeholder="Enter Username"
           />
-        </label>
-        <label htmlFor="password">
-          Password
-          <input
-            id="password"
-            onChange={changeHandler}
+        </Form.Group>
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
             type="password"
-            name="password"
-            placeholder="password"
-          />
-        </label>
-        <label htmlFor="phone">
-          Phone
-          <input
-            id="phone"
             onChange={changeHandler}
-            type="text"
-            name="phone"
-            placeholder="Phone"
+            name="password"
+            placeholder="Password"
           />
-        </label>
-
-        <button type="submit">Register</button>
-      </form>
+        </Form.Group>
+        <Form.Group controlId="formBasicPhonenumber">
+          <Form.Label>Phone Number</Form.Label>
+          <Form.Control
+            type="phone"
+            onChange={changeHandler}
+            name="phone"
+            placeholder="Phone Number"
+          />
+        </Form.Group>
+        <Button id="login_submit" type="submit">
+          Submit
+        </Button>
+      </Form>
       <p>
         Already have an account? <Link to="/">Log in</Link>
       </p>
-      
     </div>
+    // <div className="user-form">
+    //   <form onSubmit={handleSubmit}>
+    //     <label htmlFor="name">
+    //       Name
+    //       <input
+    //         id="name"
+    //         onChange={changeHandler}
+    //         type="text"
+    //         name="name"
+    //         placeholder="name"
+    //       />
+    //     </label>
+    //     <label htmlFor="username">
+    //       User Name
+    //       <input
+    //         id="username"
+    //         onChange={changeHandler}
+    //         type="text"
+    //         name="username"
+    //         placeholder="username"
+    //       />
+    //     </label>
+    //     <label htmlFor="password">
+    //       Password
+    //       <input
+    //         id="password"
+    //         onChange={changeHandler}
+    //         type="password"
+    //         name="password"
+    //         placeholder="password"
+    //       />
+    //     </label>
+    //     <label htmlFor="phone">
+    //       Phone
+    //       <input
+    //         id="phone"
+    //         onChange={changeHandler}
+    //         type="text"
+    //         name="phone"
+    //         placeholder="Phone"
+    //       />
+    //     </label>
+
+    //     <button type="submit">Register</button>
+    //   </form>
+    //   <p>
+    //     Already have an account? <Link to="/">Log in</Link>
+    //   </p>
+      
+    // </div>
   );
 };
 
