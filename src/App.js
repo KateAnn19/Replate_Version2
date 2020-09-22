@@ -42,11 +42,18 @@ function App() {
               height="130"
               className="d-inline-block align-top logo"
             />
+          <div id="nav_big_container">
           <Nav id="nav_container">
           <Nav.Link id="nav_link" href="https://ui-replatemarketing.vercel.app/">
             Contact Us
           </Nav.Link>
           </Nav>
+          <Nav id="nav_container">
+          <Nav.Link id="nav_link" href="/logout">
+            Logout
+          </Nav.Link>
+          </Nav>
+          </div>
         </Navbar>
 
       </>

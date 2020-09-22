@@ -23,10 +23,11 @@
 
 #nav_container{
     border: 1px solid mediumseagreen;
-    margin-right: 3%;
+    margin-right: 2%;
     border-radius: 5%;
-    padding: 0 5%;
+    padding: 0 4%;
     background-color: mediumseagreen;
+    
 }
 
 #nav_link{
@@ -34,6 +35,10 @@
     font-weight: 600;
 }
 
+#nav_big_container{
+  display: flex;
+  width: 20%;
+}
 
 
 /* end nav bar styling login page*/
