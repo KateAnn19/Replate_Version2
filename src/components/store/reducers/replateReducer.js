@@ -5,6 +5,9 @@ import {
   GET_BUSPROFDETAILS_START,
   GET_BUSPROFDETAILS_SUCCESS,
   GET_BUSPROFDETAILS_FAILURE,
+  GET_PICKUPS_START,
+  GET_PICKUPS_SUCCESS,
+  GET_PICKUPS_FAILURE,
   DELETE_BUSPROFILE_START,
   DELETE_BUSPROFILE_SUCCESS,
   DELETE_BUSPROFILE_FAILURE,
@@ -18,7 +21,10 @@ import {
   POST_LOGIN_CREDENTIALS_SUCCESS,
   POST_LOGIN_CREDENTIALS_FAILURE,
   LOG_OUT_USER_START,
-  LOG_OUT_USER_SUCCESS
+  LOG_OUT_USER_SUCCESS,
+  EDIT_PICKUP_START,
+  EDIT_PICKUP_FAILURE,
+  EDIT_PICKUP_SUCCESS,
 } from "../actions";
 
 export const initialState = {
@@ -29,7 +35,7 @@ export const initialState = {
   volProf: {},
   loginInfo: {},
   role: "",
-  success: false
+  success: false,
 };
 
 export const replateReducer = (state = initialState, action) => {
@@ -70,6 +76,23 @@ export const replateReducer = (state = initialState, action) => {
         ...state,
         isFetching: false,
         error: action.payload,
+      };
+    case GET_PICKUPS_START:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case GET_PICKUPS_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        pickups: action.payload
+      };
+    case GET_PICKUPS_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload
       };
     case DELETE_VOLPROFILE_START:
       return {
@@ -120,10 +143,10 @@ export const replateReducer = (state = initialState, action) => {
         isFetching: false,
         error: action.payload,
       };
-      case POST_LOGIN_CREDENTIALS_START:
+    case POST_LOGIN_CREDENTIALS_START:
       return {
         ...state,
-        isFetching: true
+        isFetching: true,
       };
     case POST_LOGIN_CREDENTIALS_SUCCESS:
       return {
@@ -132,7 +155,7 @@ export const replateReducer = (state = initialState, action) => {
         loginInfo: localStorage.setItem("token", action.payload),
         role: action.role,
         success: action.success,
-        loggedin: true
+        loggedin: true,
       };
     case POST_LOGIN_CREDENTIALS_FAILURE:
       return {
@@ -140,22 +163,39 @@ export const replateReducer = (state = initialState, action) => {
         isFetching: false,
         error: action.error,
         success: action.success,
-        loggedin: false
+        loggedin: false,
       };
     case LOG_OUT_USER_START:
-      return{
+      return {
         ...state,
-        isFetching: true
-      }
+        isFetching: true,
+      };
     case LOG_OUT_USER_SUCCESS:
-      return{
+      return {
         ...state,
         isFetching: false,
         loggedout: true,
         role: "",
         error: "",
-        success: false
-      }
+        success: false,
+      };
+    case EDIT_PICKUP_START:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case EDIT_PICKUP_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        pickups: state.pickups,
+      };
+    case EDIT_PICKUP_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload,
+      };
 
     default:
       return state;

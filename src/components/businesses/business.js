@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
+//material ui
 import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
 import IconButton from "@material-ui/core/IconButton";
 
 import { connect } from "react-redux";
@@ -18,16 +20,16 @@ import "../styles/pickups.css";
 
 const date = require("moment");
 
-function Business({ data, update, deletePickup }) {
-  const [pickups, setPickups] = useState(data);
+function Business({ pickupdata, update, getData, deletePickup, pickups }) {
+  const [picks, setPicks] = useState(pickupdata);
   const [isEditing, setIsEditing] = useState(false);
   const [editingPickup, setPickupToEdit] = useState(null);
   const [loading, setIsLoading] = useState(false);
   const { push, go } = useHistory();
 
-  const editPickup = (pickup) => {
+  const editPickup = (p) => {
     setIsEditing(true);
-    setPickupToEdit(pickup);
+    setPickupToEdit(p);
   };
 
   return (
@@ -53,7 +55,10 @@ function Business({ data, update, deletePickup }) {
               )}
               <h2>{date(p["pickup-date"]).format("ll")}</h2>
               <h2>{p["business-phone"]}</h2>
-              <button onClick={() => editPickup(p)}>Edit</button>
+              <IconButton aria-label="Edit" onClick={() => editPickup(p)}>
+                <EditIcon />
+              </IconButton>
+              {/* <button onClick={() => editPickup(p)}>Edit</button> */}
               {/* <button
                 onClick={() => {
                   deletePickup(p["pickup-id"]);
@@ -78,10 +83,11 @@ function Business({ data, update, deletePickup }) {
 
       {isEditing ? (
         <EditPickup
-          setPickups={setPickups}
+          setPickups={setPicks}
           setIsEditing={setIsEditing}
           info={editingPickup}
-          all={data}
+          data={pickupdata}
+          getData={getData}
         />
       ) : null}
     </div>
@@ -92,7 +98,7 @@ const mapStateToProps = (state) => {
   console.log("this is state in business", state);
   return {
     isFetching: state.isFetching,
-    pickups: state,
+    pickups: state.pickups,
     error: state.error,
   };
 };

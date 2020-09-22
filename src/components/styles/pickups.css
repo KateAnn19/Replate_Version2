@@ -1,34 +1,52 @@
-.container{
+/* business pickups on profile*/
+/* .container{
     display: flex;
     flex-wrap: wrap;
     width: 20%;
+} */
+
+.List {
+  margin-top: 2%;
+  text-align: left;
+  border: 1px solid antiquewhite;
+  border-radius: 2%;
+  font-family: "Montserrat", sans-serif;
+  background-color: antiquewhite;
+  margin: 0 20%;
+  padding: 5% 5%;
 }
 
-
-
-.pickups_lg_container{
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+.pickups_heading {
+  font-size: 4rem;
 }
 
-.pickup-container{
-    margin: 1% 1%;
-    
+#edit_pickup_form {
+  margin: 0 20%;
 }
 
-.pickups{
-    border: 2px solid antiquewhite;
-    border-radius: 2%;
-    width: 20%;
-    margin: 2% 2%;
-    background-color: antiquewhite;
-    color: black;
-    font-weight: 800;
-    
+/* business pickups on profile :end: */
+
+.pickups_lg_container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.pickups-container{
-    text-align: center;
-    font-family: "Montserrat", sans-serif;
+.pickup-container {
+  margin: 1% 1%;
+}
+
+.pickups {
+  border: 2px solid antiquewhite;
+  border-radius: 2%;
+  width: 20%;
+  margin: 2% 2%;
+  background-color: antiquewhite;
+  color: black;
+  font-weight: 800;
+}
+
+.pickups-container {
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
 }

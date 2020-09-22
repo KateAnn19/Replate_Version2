@@ -5,9 +5,22 @@ import { axiosWithAuth } from "../../utils/axiosWithAuth";
 import { connect } from "react-redux";
 
 //actions from Redux
-import { getBusProfData} from "../store/actions/index";
+import { getBusProfData } from "../store/actions/index";
 
-const EditProfileForm = ({ setToggle, togglestate, busProf, profile, getProfileData, getBusProfData }) => {
+//boostrap
+import Form from "react-bootstrap/Form";
+
+//bootstrap
+import Button from "react-bootstrap/Button";
+
+const EditProfileForm = ({
+  setToggle,
+  togglestate,
+  busProf,
+  profile,
+  getProfileData,
+  getBusProfData,
+}) => {
   // const [editProfile, setEditedProfile] = useState({
   //   address: profile["business-address"],
   //   name: profile["business-name"],
@@ -16,16 +29,15 @@ const EditProfileForm = ({ setToggle, togglestate, busProf, profile, getProfileD
   //   id: profile["business-id"],
   // });
   const [editProfile, setEditedProfile] = useState({
-    "id" : busProf["donor-id"],
-    "name": busProf["business-name"],
-    "phone": busProf["business-phone"],
-    "address": busProf["business-address"],
-    "username": busProf["username"]
+    id: busProf["donor-id"],
+    name: busProf["business-name"],
+    phone: busProf["business-phone"],
+    address: busProf["business-address"],
+    username: busProf["username"],
   });
- //const [editProfile, setEditedProfile] = useState(busProf);
- console.log("This is edit profile", editProfile)
+  //const [editProfile, setEditedProfile] = useState(busProf);
+  console.log("This is edit profile", editProfile);
   const { push } = useHistory();
-
 
   const handleChange = (e) => {
     setEditedProfile({
@@ -50,17 +62,50 @@ const EditProfileForm = ({ setToggle, togglestate, busProf, profile, getProfileD
         //getData()
         //add a successfully assigned to profile message
         setTimeout(function () {
-          
           window.history.go(-1);
         }, 1000);
-       
       })
       .catch((err) => console.log(err.response));
   };
 
   return (
-    <div className="">
-      <form onSubmit={editBusProfile}>
+    <div className="edit_bus_prof_form">
+      <Form id="edit_pickup_form" onSubmit={editBusProfile}>
+        <Form.Group controlId="formBasicname">
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            type="name"
+            value={editProfile.name}
+            onChange={handleChange}
+            name="name"
+          />
+        </Form.Group>
+        <Form.Group controlId="formBasicphone">
+          <Form.Label>Phone</Form.Label>
+          <Form.Control
+            type="phone"
+            value={editProfile.phone}
+            onChange={handleChange}
+            name="phone"
+          />
+        </Form.Group>
+        <Form.Group controlId="formBasicaddress">
+          <Form.Label>Address</Form.Label>
+          <Form.Control
+            type="address"
+            value={editProfile.address}
+            onChange={handleChange}
+            name="address"
+          />
+        </Form.Group>
+
+        <Button id="edit_submit" type="submit">
+          Submit
+        </Button>
+        <Button onClick={exit}>X</Button>
+      </Form>
+
+      {/* <form onSubmit={editBusProfile}>
         <label htmlFor="type">Name</label>
         <input
           id="name"
@@ -85,13 +130,13 @@ const EditProfileForm = ({ setToggle, togglestate, busProf, profile, getProfileD
           name="address"
           value={editProfile.address}
         />
-        <button type="submit" >Add Updated Profile Information</button>
+        <button type="submit">Add Updated Profile Information</button>
       </form>
       <button onClick={exit}>X</button>
+    </div> */}
     </div>
   );
 };
-
 
 const mapStateToProps = (state) => {
   console.log("this is state in edit business profile form", state);
@@ -102,9 +147,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getBusProfData})(
-  EditProfileForm
-);
-
+export default connect(mapStateToProps, { getBusProfData })(EditProfileForm);
 
 //export default EditProfileForm;

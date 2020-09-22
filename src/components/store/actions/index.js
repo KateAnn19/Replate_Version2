@@ -1,20 +1,24 @@
-import axios from "axios";
 import { axiosWithAuth } from "../../../utils/axiosWithAuth";
 
 export const GET_BUSPROFDETAILS_START = "GET_BUSPROFDETAILS_START";
 export const GET_BUSPROFDETAILS_SUCCESS = "GET_BUSPROFDETAILS_SUCCESS";
 export const GET_BUSPROFDETAILS_FAILURE = "GET_BUSPROFDETAILS_FAILURE";
 
+export const GET_PICKUPS_START = "GET_PICKUPS_START";
+export const GET_PICKUPS_SUCCESS = "GET_PICKUPS_SUCCESS";
+export const GET_PICKUPS_FAILURE = "GET_PICKUPS_FAILURE";
+
 export const DELETE_BUSPROFILE_START = "DELETE_BUSPROFILE_START";
 export const DELETE_BUSPROFILE_SUCCESS = "DELETE_BUSPROFILE_SUCCESS";
 export const DELETE_BUSPROFILE_FAILURE = "DELETE_BUSPROFILE_FAILURE";
 
-
+export const EDIT_PICKUP_START = "EDIT_PICKUP_START";
+export const EDIT_PICKUP_SUCCESS = "EDIT_PICKUP_SUCCESS";
+export const EDIT_PICKUP_FAILURE = "EDIT_PICKUP_FAILURE";
 
 export const DELETE_PICKUP_START = "DELETE_PICKUP_START";
 export const DELETE_PICKUP_SUCCESS = "DELETE_PICKUP_SUCCESS";
 export const DELETE_PICKUP_FAILURE = "DELETE_PICKUP_FAILURE";
-
 
 export const GET_VOLPROFDETAILS_START = "GET_VOLPROFDETAILS_START";
 export const GET_VOLPROFDETAILS_SUCCESS = "GET_VOLPROFDETAILS_SUCCESS";
@@ -30,7 +34,6 @@ export const POST_LOGIN_CREDENTIALS_FAILURE = "POST_LOGIN_CREDENTIALS_FAILURE";
 
 export const LOG_OUT_USER_START = "LOG_OUT_USER_START";
 export const LOG_OUT_USER_SUCCESS = "LOG_OUT_USER_SUCCESS";
-
 
 export const deletePickup = (id) => {
   // make an async request
@@ -56,31 +59,28 @@ export const getBusProfData = () => {
     axiosWithAuth()
       .get("donors")
       .then((res) => {
-       
         dispatch({ type: GET_BUSPROFDETAILS_SUCCESS, payload: res.data });
       })
       .catch((err) => {
         dispatch({ type: GET_BUSPROFDETAILS_FAILURE, payload: err });
       });
   };
-}
+};
 
 export const deleteBusProf = () => {
   //delete profile
-  return dispatch => {
-    dispatch({type: DELETE_BUSPROFILE_START});
+  return (dispatch) => {
+    dispatch({ type: DELETE_BUSPROFILE_START });
     axiosWithAuth()
-    .delete("donors")
-    .then((res) => {
-      dispatch({ type: DELETE_BUSPROFILE_SUCCESS});
-    })
-    .catch(err => {
-      dispatch({type: DELETE_BUSPROFILE_FAILURE, payload: err});
-  })
-  }
+      .delete("donors")
+      .then((res) => {
+        dispatch({ type: DELETE_BUSPROFILE_SUCCESS });
+      })
+      .catch((err) => {
+        dispatch({ type: DELETE_BUSPROFILE_FAILURE, payload: err });
+      });
+  };
 };
- 
-
 
 export const getVolProfData = () => {
   return (dispatch) => {
@@ -89,7 +89,6 @@ export const getVolProfData = () => {
     axiosWithAuth()
       .get("volunteers")
       .then((res) => {
-        
         dispatch({ type: GET_VOLPROFDETAILS_SUCCESS, payload: res.data });
       })
       .catch((err) => {
@@ -98,55 +97,101 @@ export const getVolProfData = () => {
   };
 };
 
-
 export const deleteVolProf = () => {
   //delete profile
-  return dispatch => {
-    dispatch({type: DELETE_VOLPROFILE_START});
+  return (dispatch) => {
+    dispatch({ type: DELETE_VOLPROFILE_START });
     axiosWithAuth()
-    .delete("volunteers")
-    .then((res) => {
-      dispatch({ type: DELETE_VOLPROFILE_SUCCESS});
-    })
-    .catch(err => {
-      dispatch({type: DELETE_VOLPROFILE_FAILURE, payload: err});
-  })
-  }
+      .delete("volunteers")
+      .then((res) => {
+        dispatch({ type: DELETE_VOLPROFILE_SUCCESS });
+      })
+      .catch((err) => {
+        dispatch({ type: DELETE_VOLPROFILE_FAILURE, payload: err });
+      });
+  };
 };
 
 export const login = (loginInfo) => {
   //delete profile
- 
-  return dispatch => {
-    dispatch({type: POST_LOGIN_CREDENTIALS_START});
+
+  return (dispatch) => {
+    dispatch({ type: POST_LOGIN_CREDENTIALS_START });
     axiosWithAuth()
-    .post("auth/login", loginInfo)
-    .then((res) => {
-      dispatch({ type: POST_LOGIN_CREDENTIALS_SUCCESS, payload: res.data.token, role: loginInfo.role, success: true});
-    })
-    .catch(err => {
-      //let name = new DOMException();
-      // console.log(name.name);
-      // console.log(name.NETWORK_ERR);
-      // console.log(err);
-      // debugger
-      // let parser = new DOMParser()
-      // let doc = parser.parseFromString(err, "text/html");
-      // let string = doc.getElementsByTagName("body")[0].innerText;
-      // let matches = string.match(/(\d+)/); 
-      dispatch({type: POST_LOGIN_CREDENTIALS_FAILURE, payload: err});
-  })
-  }
+      .post("auth/login", loginInfo)
+      .then((res) => {
+        dispatch({
+          type: POST_LOGIN_CREDENTIALS_SUCCESS,
+          payload: res.data.token,
+          role: loginInfo.role,
+          success: true,
+        });
+      })
+      .catch((err) => {
+        //let name = new DOMException();
+        // console.log(name.name);
+        // console.log(name.NETWORK_ERR);
+        // console.log(err);
+        // debugger
+        // let parser = new DOMParser()
+        // let doc = parser.parseFromString(err, "text/html");
+        // let string = doc.getElementsByTagName("body")[0].innerText;
+        // let matches = string.match(/(\d+)/);
+        dispatch({ type: POST_LOGIN_CREDENTIALS_FAILURE, payload: err });
+      });
+  };
 };
 
+export const updatePickup = (updatedpickup) => {
+  console.log(updatePickup);
+  debugger;
+  return (dispatch) => {
+    dispatch({ type: EDIT_PICKUP_START });
+    axiosWithAuth()
+      .put(`pickups/${updatedpickup["pickup-id"]}`, updatedpickup)
+      .then((res) => {
+        dispatch({ type: EDIT_PICKUP_SUCCESS, payload: res.data });
+      })
+      .catch((err) => {
+        dispatch({ type: EDIT_PICKUP_FAILURE, payload: err });
+      });
+  };
+};
 
 export const logout = () => {
-  return dispatch => {
-    dispatch({type: LOG_OUT_USER_START});
-    window.localStorage.removeItem('token');
-    window.localStorage.removeItem('loggedInUser');
-    dispatch({type: LOG_OUT_USER_SUCCESS});
-  }
-}
+  return (dispatch) => {
+    dispatch({ type: LOG_OUT_USER_START });
+    window.localStorage.removeItem("token");
+    window.localStorage.removeItem("loggedInUser");
+    dispatch({ type: LOG_OUT_USER_SUCCESS });
+  };
+};
 
+export const getPickups = () => {
+  return (dispatch) => {
+    dispatch({ type: GET_PICKUPS_START });
+    axiosWithAuth()
+      .get("pickups")
+      .then((res) => {
+        dispatch({ type: GET_PICKUPS_SUCCESS, payload: res.data });
+      })
+      .catch((err) => {
+        dispatch({ type: GET_PICKUPS_FAILURE, payload: err });
+      });
+  };
+};
 
+//   axiosWithAuth()
+//     .put(`pickups/${info["pickup-id"]}`, editPickup)
+//     .then((response) => {
+//       console.log(response);
+//       setPickups([...data, response]);
+//       push('/business-profile');
+//       setTimeout(function () {
+//         setIsEditing(false);
+//       }, 2000);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// };

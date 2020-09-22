@@ -8,16 +8,35 @@ import moment from "moment";
 import { useHistory } from "react-router-dom";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
-const EditPickup = ({ id, setIsEditing, info, data, setPickups }) => {
+//redux
+import { connect } from "react-redux";
+//actions from Redux
+import { getBusProfData, updatePickup } from "../store/actions/index";
+
+//boostrap
+import Form from "react-bootstrap/Form";
+
+//bootstrap
+import Button from "react-bootstrap/Button";
+
+const EditPickup = ({
+  id,
+  setIsEditing,
+  info,
+  data,
+  setPickups,
+  updatePickup,
+  getData,
+}) => {
   const [editPickup, setEditPickup] = useState({
     "pickup-id": info["pickup-id"],
     type: info.type,
     amount: info.amount,
     "pickup-date": info["pickup-date"],
   });
-  const { push } = useHistory();
-  console.log("HERE", editPickup);
+  const { push, go } = useHistory();
 
+  console.log(editPickup)
   //   {
   //     "pickup-id": 13,
   //     "type": "naan",
@@ -36,15 +55,30 @@ const EditPickup = ({ id, setIsEditing, info, data, setPickups }) => {
     setIsEditing(false);
   };
 
-  const updatePickup = (e) => {
+  //redux
+  // const update = (e) => {
+  //   e.preventdefault();
+  //   console.log(editPickup)
+  //   updatePickup(editPickup);  // //getData();
+  //   setTimeout(function () {
+  //     setIsEditing(false);
+  //     push('/business-profile');
+  //   }, 4000);
+  // };
+  //redux
+
+  const editpickup = (e) => {
+    e.preventDefault();
     axiosWithAuth()
       .put(`pickups/${info["pickup-id"]}`, editPickup)
       .then((response) => {
-        console.log(response);
-        setPickups([...data, response]);
+        console.log("response in edit", response);
+        setPickups([...data, response.data]);
+        
         setTimeout(function () {
           setIsEditing(false);
-        }, 2000);
+          go(0);
+        }, 1000);
       })
       .catch((err) => {
         console.log(err);
@@ -53,7 +87,42 @@ const EditPickup = ({ id, setIsEditing, info, data, setPickups }) => {
 
   return (
     <div className="addPlateForm">
-      <form onSubmit={updatePickup}>
+      <Form id="edit_pickup_form" onSubmit={editpickup}>
+        <Form.Group controlId="formBasictype">
+          <Form.Label>Type</Form.Label>
+          <Form.Control
+            type="type"
+            value={editPickup["type"]}
+            onChange={handleChange}
+            name="type"
+          />
+        </Form.Group>
+        <Form.Group controlId="formBasicamount">
+          <Form.Label>Amount</Form.Label>
+          <Form.Control
+            type="amount"
+            value={editPickup["amount"]}
+            onChange={handleChange}
+            name="amount"
+          />
+        </Form.Group>
+        <Form.Group controlId="formBasicdate">
+          <Form.Label>Pickup Date: yyyy-mm-dd</Form.Label>
+          <Form.Control
+            type="pickup-date"
+            value={editPickup["pickup-date"]}
+            onChange={handleChange}
+            name="pickup-date"
+          />
+        </Form.Group>
+
+        <Button id="edit_submit" type="submit">
+          Submit
+        </Button>
+        {/* <Button onClick={exit}>X</Button> */}
+      </Form>
+
+      {/* <form onSubmit={updatePickup}>
         <label htmlFor="type">Type</label>
         <input
           id="type"
@@ -82,11 +151,23 @@ const EditPickup = ({ id, setIsEditing, info, data, setPickups }) => {
           value={editPickup["pickup-date"]}
         />
 
-        <button type="submit">Add Updated Pickup</button>
-      </form>
-      <button onClick={exit}>X</button>
+        <Button type="submit">Add Updated Pickup</Button>
+      </form> */}
+      <Button onClick={exit}>X</Button>
     </div>
   );
 };
 
-export default EditPickup;
+const mapStateToProps = (state) => {
+  console.log("this is state in editing", state);
+  return {
+    isFetching: state.isFetching,
+    error: state.error,
+    busProf: state.busProf,
+    pickups: state.pickups,
+  };
+};
+
+export default connect(mapStateToProps, { getBusProfData, updatePickup })(
+  EditPickup
+);

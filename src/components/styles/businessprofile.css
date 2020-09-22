@@ -1,0 +1,37 @@
+.business_info_container {
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+}
+
+#prof_button_group {
+  text-align: center;
+  padding: 3%;
+}
+
+
+#add{
+    background: rgb(131, 233, 131);
+    border: none;
+    margin-right: 2%;
+}
+
+#delete{
+    background: red;
+    border: none;
+    margin-right: 2%;
+}
+
+#edit{
+    background: rgb(131, 233, 131);
+    border: none;
+    margin-right: 2%;
+}
+
+.loading{
+    text-align: center;
+}
+
+
+.edit_bus_prof_form{
+  margin: 0 30%;
+}

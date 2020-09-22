@@ -1,30 +1,28 @@
-//this will display a particular businesse's profile
-//the business will be able to edit their profile which includes their name, phone number and address
-//if the business updates any of their information the updated information will also effect the pickups they
-//have in progress whether it is accepted by a volunteer or if it is on the pickup list unassigned
-//the business will be able to edit or delete pickups they have created
-//the businesse's profile will display the pickups they have created along with the volunteer info that has agreed to pick it up ////if a volunteer is assigned and if a volunteer is not assigned then this information is blank
-//the pickups data will include ...
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
+//styles
+import "../styles/businessprofile.css";
+import "../styles/pickups.css";
 
+//bootstrap
+import Button from "react-bootstrap/Button";
 
 import EditPickup from "./editPickup";
 
 import Business from "./business";
-
 import EditProfileForm from "./editBusProfileForm";
 
+//redux
 import { connect } from "react-redux";
-
 //actions from Redux
-import { getBusProfData, deleteBusProf } from "../store/actions/index";
-
-//styles
-import "../styles/pickups.css";
+import {
+  getBusProfData,
+  deleteBusProf,
+  getPickups,
+} from "../store/actions/index";
 
 const d = require("moment");
 
@@ -36,76 +34,94 @@ let fakeProfile = {
   role: "donor",
 };
 
-function BusinessProfile({ getBusProfData, busProf, deleteBusProf }) {
+function BusinessProfile({
+  getBusProfData,
+  busProf,
+  deleteBusProf,
+  getPickups,
+  pickups,
+}) {
   const [profile, setProfile] = useState(fakeProfile);
-  const [pickups, setPickups] = useState([]);
+  const [picks, setPicks] = useState(pickups);
   const [isLoaded, setIsLoaded] = useState(false);
   const { push } = useHistory();
   const [toggle, setToggle] = useState(false);
+
+  console.log(pickups);
 
   useEffect(() => {
     // make a GET request to fetch the data
     // pass the token with the request on the Authorization request header
     getBusProfData();
-    getData();
+    //getData();
+    getPickups();
+
+    setIsLoaded(!isLoaded);
   }, []);
 
-  const getData = () => {
-    console.log("calling update");
-    axiosWithAuth()
-      .get("pickups")
-      .then((res) => {
-        console.log(res);
-        setPickups([...res.data]);
-        setTimeout(function () {
-          setIsLoaded(true);
-        }, 1000);
-      })
-      .catch((err) => console.log(err));
-  };
+  // const getData = () => {
+  //   console.log("calling update");
+  //   axiosWithAuth()
+  //     .get("pickups")
+  //     .then((res) => {
+  //       console.log(res);
+  //       setPicks([...res.data]);
+  //       setTimeout(function () {
+  //         setIsLoaded(true);
+  //       }, 1000);
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
 
   //add pickup
 
   return (
     <div>
       {isLoaded === false ? (
-        "loading"
+        <h2 className="loading">loading</h2>
       ) : (
-        <>
+        <div className="business_info_container">
           <h3>{busProf["business-name"]}</h3>
-          <h3>{busProf["business-address"]}</h3>
-          <h3>{busProf["business-phone"]}</h3>
+          <h3>Address: {busProf["business-address"]}</h3>
+          <h3>Phone: {busProf["business-phone"]}</h3>
           <h3>{busProf.username}</h3>
-        </>
+        </div>
       )}
-      {toggle ? (
-        push('/edit-business-profile')
-        //<EditProfileForm getProfileData={getBusProfData} profile={busProf} togglestate={toggle} setToggle={setToggle} />
-      ) : null}
-      <h2>Current Pickups</h2>
+      {toggle
+        ? push("/edit-business-profile")
+        : //<EditProfileForm getProfileData={getBusProfData} profile={busProf} togglestate={toggle} setToggle={setToggle} />
+          null}
+      <h2 className="pickups_heading">Current Pickups</h2>
       {isLoaded === false ? (
-        "loading"
+        <h2 className="loading">loading</h2>
       ) : (
         <Business
           setIsLoaded={setIsLoaded}
-          update={getData}
-          setAllPickups={setPickups}
-          data={pickups}
+          //update={getData}
+          setAllPickups={setPicks}
+          pickupdata={pickups}
+          //getData={getData}
         />
       )}
+      <div id="prof_button_group">
+        <Button id="add" onClick={() => push("/add-pickup")}>
+          Add Pickup
+        </Button>
+        {/* <button onClick={() => setToggle(!toggle)}>Edit Profile</button> */}
+        <Button id="edit" onClick={() => push("/edit-business-profile")}>
+          Edit Profile
+        </Button>
 
-      <button onClick={() => push("/add-pickup")}>Add Pickup</button>
-      {/* <button onClick={() => setToggle(!toggle)}>Edit Profile</button> */}
-      <button onClick={() => push('/edit-business-profile')}>Edit Profile</button>
-
-      <button
-        onClick={() => {
-          deleteBusProf();
-          push("/logout");
-        }}
-      >
-        Delete Profile
-      </button>
+        <Button
+          id="delete"
+          onClick={() => {
+            deleteBusProf();
+            push("/logout");
+          }}
+        >
+          Delete Profile
+        </Button>
+      </div>
     </div>
   );
 } //end businessProfile
@@ -116,11 +132,12 @@ const mapStateToProps = (state) => {
     isFetching: state.isFetching,
     error: state.error,
     busProf: state.busProf,
+    pickups: state.pickups,
   };
 };
 
-export default connect(mapStateToProps, { getBusProfData, deleteBusProf })(
-  BusinessProfile
-);
-
-
+export default connect(mapStateToProps, {
+  getBusProfData,
+  getPickups,
+  deleteBusProf,
+})(BusinessProfile);

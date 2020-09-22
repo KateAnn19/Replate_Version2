@@ -1,0 +1,10 @@
+.add_pickup_form_cont{
+    margin-top: 1%;
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+}
+
+#add_pickup{
+    background-color: antiquewhite;
+    margin: 1% 40%;
+}
